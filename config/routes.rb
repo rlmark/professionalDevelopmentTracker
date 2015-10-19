@@ -1,4 +1,15 @@
 Rails.application.routes.draw do
+  # Home Route
+  get '/', to: 'home#index', as: :root
+  
+  # Goal Routes
+  get 'goals',          to: 'goals#index',      as: :goals
+  get 'goals/new',      to: 'goals#new',        as: :new_goal
+  post 'goals',         to: 'goals#create'
+  get 'goal/:id',       to: 'goals#show',       as: :goal
+  patch 'goal/:id',     to: 'goals#update'
+  delete 'goal/:id',    to: 'goals#destroy'
+  get 'goal/:id/edit',  to: 'goals#edit',       as: :edit_goal
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
