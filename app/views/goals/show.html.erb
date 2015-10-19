@@ -1,4 +1,18 @@
 <p id="notice"><%= notice %></p>
 
+<h2><%= @goal.name %></h2>
+
+<p>
+  <%= @goal.description %>
+</p>
+
+<p>
+  <%= @goal.statis %>
+</p>
+
+<p>
+  <%= @goal.due_date %>
+</p>
+
 <%= link_to 'Edit', edit_goal_path(@goal) %> |
 <%= link_to 'Back', goals_path %>

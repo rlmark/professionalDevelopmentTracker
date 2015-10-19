@@ -15,6 +15,7 @@ class GoalsController < ApplicationController
 
   # GET /goals/new
   def new
+    @status_options = [["Created", "created"], ["In-Progress", "in-progress"], ["Done", "done"]]
     @goal = Goal.new
   end
 
@@ -27,6 +28,7 @@ class GoalsController < ApplicationController
   # POST /goals.json
   def create
     @goal = Goal.new(goal_params)
+    @goal.status = "created"
 
     respond_to do |format|
       if @goal.save
@@ -71,6 +73,6 @@ class GoalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def goal_params
-      params.require(:goal).permit(:name, :description, :due_date) 
+      params.require(:goal).permit(:name, :description, :due_date, :status) 
     end
 end
