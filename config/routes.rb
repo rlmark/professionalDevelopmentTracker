@@ -6,13 +6,23 @@ Rails.application.routes.draw do
   get '/', to: 'home#index', as: :root
 
   # Goal Routes
-  get 'goals',          to: 'goals#index',      as: :goals
+  get 'goal',          to: 'goals#index',      as: :goals
   get 'goals/new',      to: 'goals#new',        as: :new_goal
   post 'goals',         to: 'goals#create'
   get 'goal/:id',       to: 'goals#show',       as: :goal
   patch 'goal/:id',     to: 'goals#update'
   delete 'goal/:id',    to: 'goals#destroy'
   get 'goal/:id/edit',  to: 'goals#edit',       as: :edit_goal
+  
+  # Subtask Routes
+  get 'subtask',           to: 'subtasks#index',      as: :subtasks
+  get 'subtasks/new',      to: 'subtasks#new',        as: :new_subtask
+  post 'subtasks',         to: 'subtasks#create'
+  get 'subtask/:id',       to: 'subtasks#show',       as: :subtask
+  patch 'subtask/:id',     to: 'subtasks#update'
+  delete 'subtask/:id',    to: 'subtasks#destroy'
+  get 'subtask/:id/edit',  to: 'subtasks#edit',       as: :edit_subtask
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
