@@ -17,6 +17,7 @@ class GoalsController < ApplicationController
   def new
     @status_options = [["Created", "created"], ["In-Progress", "in-progress"], ["Done", "done"]]
     @goal = Goal.new
+    build_tag_fields
   end
 
   # GET /goals/1/edit
@@ -28,7 +29,15 @@ class GoalsController < ApplicationController
   # POST /goals.json
   def create
     @goal = Goal.new(goal_params)
-    @goal.status = "created"
+    @goal.user_id = current_user.id
+    raise
+    #@goal.tag_goals_attributes =
+    #@goal.tag_goals << TagGoal.new
+    # @goal.tag_goals.build
+    # params[:goal][:tag_goal].map do |k,v|
+    #   @goal.tag_goals(tag_id: v.to_i)
+    # end
+    # @goal.attributes = goal_params
 
     respond_to do |format|
       if @goal.save
@@ -65,6 +74,12 @@ class GoalsController < ApplicationController
     end
   end
 
+  def build_tag_fields
+    Tag.all.each do |tag|
+      @goal.tag_goals.build(tag_id: tag.id)
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_goal
@@ -73,6 +88,10 @@ class GoalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def goal_params
-      params.require(:goal).permit(:name, :description, :due_date, :status) 
+      params.require(:goal).permit(:name,
+                                  :description,
+                                  :due_date,
+                                  :status,
+                                  :tag_goals_attributes => [:id, :tag_id, :goal_id])
     end
 end

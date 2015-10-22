@@ -10,25 +10,32 @@
       </ul>
     </div>
   <% end %>
-  
+
   <div class="form-group">
     <%= f.label :name, "Goal:", {class: "col-sm-2 control-label"} %>
     <%= f.text_field :name, {class: "col-sm-10"} %>
   </div>
-  
+
   <div class="form-group">
     <%= f.label :description, "Description:", {class: "col-sm-2 control-label"} %>
     <%= f.text_area :description, {class: "col-sm-10"} %>
   </div>
-  
+
   <div class="form-group">
     <%= f.label :status, "Status:", {class: "col-sm-2 control-label"} %>
     <%= f.select :status, ["Created", "In-Progress", "Done", "On-Hold"], {class: "col-sm-10"} %>
   </div>
-  
+
   <%= f.label :due_date, "Due:", {class: "col-sm-2 control-label"} %>
   <%= f.date_field(:due_date) %>
-  
+
+  <div class="form-group">
+    <%= f.fields_for :tag_goal do |tag_fields| %>
+      <%= tag_fields.label :tag, "Tag:", {class: "col-sm-2 control-label"} %>
+      <%= tag_fields.select :name, Tag.all_tag_names, {include_blank: "Please select"} %>
+    <% end %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

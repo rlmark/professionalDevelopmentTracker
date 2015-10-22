@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+tags = ["Design Patterns", "Testing", "Refactoring", "Pairing", "Code"]
+
+tags.each do |tag|
+  Tag.where(name: tag).first_or_create
+end
