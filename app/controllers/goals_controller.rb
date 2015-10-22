@@ -17,7 +17,6 @@ class GoalsController < ApplicationController
   def new
     @status_options = [["Created", "created"], ["In-Progress", "in-progress"], ["Done", "done"]]
     @goal = Goal.new
-    build_tag_fields
   end
 
   # GET /goals/1/edit
@@ -30,14 +29,6 @@ class GoalsController < ApplicationController
   def create
     @goal = Goal.new(goal_params)
     @goal.user_id = current_user.id
-    raise
-    #@goal.tag_goals_attributes =
-    #@goal.tag_goals << TagGoal.new
-    # @goal.tag_goals.build
-    # params[:goal][:tag_goal].map do |k,v|
-    #   @goal.tag_goals(tag_id: v.to_i)
-    # end
-    # @goal.attributes = goal_params
 
     respond_to do |format|
       if @goal.save
@@ -71,12 +62,6 @@ class GoalsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to goals_url, notice: 'Goal was successfully destroyed.' }
       format.json { head :no_content }
-    end
-  end
-
-  def build_tag_fields
-    Tag.all.each do |tag|
-      @goal.tag_goals.build(tag_id: tag.id)
     end
   end
 

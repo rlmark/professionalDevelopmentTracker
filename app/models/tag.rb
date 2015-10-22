@@ -10,8 +10,4 @@ class Tag < ActiveRecord::Base
   def self.all_tag_names
     self.order_tags.map(&:name).uniq.reject(&:blank?)
   end
-
-  # def self.tag_names_with_ids
-  #   self.Tag.all.map { |tag| (tag.id, tag.name) }
-  # end
 end
