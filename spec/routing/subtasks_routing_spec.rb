@@ -11,9 +11,9 @@ RSpec.describe SubtasksController, type: :routing do
       expect(get("/subtasks/new")).to route_to("subtasks#new")
     end
 
-    it "routes to #show" do
-      expect(get("/subtasks/1")).to route_to("subtasks#show", :id => "1")
-    end
+    # it "routes to #show" do
+    #   expect(get("/subtasks/1")).to route_to("subtasks#show", :id => "1")
+    # end
     #
     # it "routes to #edit" do
     #   expect(:get => "/subtasks/1/edit").to route_to("subtasks#edit", :id => "1")
