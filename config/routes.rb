@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
 
-  devise_for :users, path_names: {sign_in: 'login', sign_out: 'logout'}
+  devise_for :users, path_names: {sign_in: 'login', sign_out: 'logout'} 
+  
+  # Sends the signed in user to a different home page
+  authenticated :user do
+    root :to => "goals#index"
+  end
 
-  # Home Route
-  get '/', to: 'home#index', as: :root
-
+  # Home Route for non-authenticated users
+  get '/', to: 'home#index' #, as: :root
+  
   # Goal Routes
-  get 'goal',          to: 'goals#index',      as: :goals
+  get 'goals',          to: 'goals#index',      as: :goals
   get 'goals/new',      to: 'goals#new',        as: :new_goal
   post 'goals',         to: 'goals#create'
   get 'goal/:id',       to: 'goals#show',       as: :goal
@@ -15,7 +20,7 @@ Rails.application.routes.draw do
   get 'goal/:id/edit',  to: 'goals#edit',       as: :edit_goal
   
   # Subtask Routes
-  get 'subtask',           to: 'subtasks#index',      as: :subtasks
+  get 'subtasks',          to: 'subtasks#index',      as: :subtasks
   get 'subtasks/new',      to: 'subtasks#new',        as: :new_subtask
   post 'subtasks',         to: 'subtasks#create'
   get 'subtask/:id',       to: 'subtasks#show',       as: :subtask
