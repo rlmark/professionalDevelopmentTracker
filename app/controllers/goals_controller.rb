@@ -30,6 +30,10 @@ class GoalsController < ApplicationController
   # POST /goals.json
   def create
     @goal = Goal.new(goal_params)
+<<<<<<< HEAD
+=======
+    @goal.user_id = current_user.id
+>>>>>>> ff5fd39a5f843c8035d9633bb45dd184edf03904
 
     if @goal.status = "" 
       @goal.status = "created"
@@ -79,6 +83,11 @@ class GoalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def goal_params
-      params.require(:goal).permit(:name, :description, :due_date, :status, :subtasks_attributes => [:name, :id]) 
+      params.require(:goal).permit(:name,
+                                  :description,
+                                  :due_date,
+                                  :status,
+                                  :tag_goals_attributes => [:id, :tag_id, :goal_id], 
+                                  :subtasks_attributes => [:name, :id])
     end
 end
