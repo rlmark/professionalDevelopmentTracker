@@ -30,10 +30,8 @@ class GoalsController < ApplicationController
   # POST /goals.json
   def create
     @goal = Goal.new(goal_params)
-<<<<<<< HEAD
-=======
+
     @goal.user_id = current_user.id
->>>>>>> ff5fd39a5f843c8035d9633bb45dd184edf03904
 
     if @goal.status = "" 
       @goal.status = "created"
