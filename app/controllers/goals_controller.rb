@@ -17,6 +17,8 @@ class GoalsController < ApplicationController
   def new
     @status_options = [["Created", "created"], ["In-Progress", "in-progress"], ["Done", "done"]]
     @goal = Goal.new
+    @goal.subtasks.build
+
   end
 
   # GET /goals/1/edit
@@ -28,8 +30,11 @@ class GoalsController < ApplicationController
   # POST /goals.json
   def create
     @goal = Goal.new(goal_params)
-    @goal.status = "created"
 
+    if @goal.status = "" 
+      @goal.status = "created"
+    end
+        
     respond_to do |format|
       if @goal.save
         format.html { redirect_to @goal, notice: 'Goal was successfully created.' }
@@ -39,6 +44,7 @@ class GoalsController < ApplicationController
         format.json { render json: @goal.errors, status: :unprocessable_entity }
       end
     end
+     
   end
 
   # PATCH/PUT /goals/1
@@ -73,6 +79,6 @@ class GoalsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def goal_params
-      params.require(:goal).permit(:name, :description, :due_date, :status) 
+      params.require(:goal).permit(:name, :description, :due_date, :status, :subtasks_attributes => [:name, :id]) 
     end
 end
